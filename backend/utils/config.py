@@ -17,7 +17,7 @@ class Settings:
     DATABASE_URL: str = os.getenv(
         "DATABASE_URL",
         "postgresql://placementprep:placementprep123@localhost:5432/placementprep"
-    )
+    ).replace("postgres://", "postgresql://", 1)
 
     # Redis
     REDIS_URL: str = os.getenv("REDIS_URL", "redis://localhost:6379")
