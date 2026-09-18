@@ -26,7 +26,7 @@ app = FastAPI(
 # ── CORS ────────────────────────────────────────────────────────────────────
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://localhost:3000", "*"],
+    allow_origins=settings.ALLOWED_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -42,6 +42,8 @@ app.include_router(progress.router)
 @app.on_event("startup")
 async def startup_event():
     logger.info("🚀 PlacementPrep AI starting up…")
+    if settings.ENVIRONMENT == "production" and settings.APP_SECRET_KEY == "change-me-in-production":
+        logger.warning("⚠️  Security Warning: APP_SECRET_KEY is set to default. Please configure a secure secret in production.")
     try:
         create_tables()
         logger.info("✅ Database tables ready.")

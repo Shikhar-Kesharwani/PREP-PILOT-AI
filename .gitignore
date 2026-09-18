@@ -1,5 +1,7 @@
 # Environments
 .env
+.env.*
+!.env.example
 .venv
 venv/
 ENV/
@@ -45,7 +47,11 @@ pnpm-debug.log*
 
 # Database / Vector Stores
 chroma_db/
+data/vectorstore/
 *.sqlite3
+*.pkl
+bm25_*.json
+
 
 # OS
 .DS_Store

@@ -34,6 +34,16 @@ class Settings:
     APP_PORT: int = int(os.getenv("APP_PORT", "8000"))
     ENVIRONMENT: str = os.getenv("ENVIRONMENT", "development")
 
+    # CORS
+    ALLOWED_ORIGINS: list = [
+        origin.strip()
+        for origin in os.getenv(
+            "ALLOWED_ORIGINS",
+            "http://localhost:5173,http://localhost:3000,https://prep-pilot-ai-three.vercel.app"
+        ).split(",")
+        if origin.strip()
+    ]
+
     # Retrieval
     TOP_K_RETRIEVAL: int = 20       # retrieve top 20 before reranking
     TOP_K_FINAL: int = 10           # return top 10 after reranking
